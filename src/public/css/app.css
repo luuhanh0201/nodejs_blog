@@ -1,2 +1,11 @@
-.wrapper {
-  color: blue; }
+.d-flex {
+  margin-bottom: 8px;
+  margin-top: 8px; }
+
+.about-me {
+  color: #14b067 !important;
+  font-weight: 600; }
+  .about-me:hover {
+    color: #fff !important;
+    text-shadow: #14b067 0px 0px 2px;
+    transition: 0.2s linear; }

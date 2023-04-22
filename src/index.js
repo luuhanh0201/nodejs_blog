@@ -6,7 +6,7 @@ const handlebars = require('express-handlebars').engine;
 const app = express();
 const port = 8080;
 
-app.use(express.static(path.join(__dirname,'public')))
+app.use(express.static(path.join(__dirname, 'public')))
 
 // HTTP Logger
 app.use(morgan('combined'));
@@ -15,14 +15,31 @@ app.use(morgan('combined'));
 app.engine('hbs', handlebars({ extname: ".hbs" }));
 app.set('view engine', 'hbs')
 app.set("views", path.join(__dirname, "resources/views"))
+
+
+// router
 app.get('/', (req, res) => {
   res.render('home');
 })
-app.get('/news' , (req, res) => {
-  res.render('news');
+app.get('/technology', (req, res) => {
+  res.render('technology');
+})
+app.get('/company', (req, res) => {
+  res.render('company')
+})
+app.get('/learn', (req, res) => {
+  res.render('learn')
+})
+app.get('/about-me', (req, res) => {
+  res.render('about-me')
 })
 
 
+
+
+
+
+// port
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
