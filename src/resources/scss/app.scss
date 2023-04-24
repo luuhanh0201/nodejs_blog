@@ -8,9 +8,19 @@
   color: #14b067 !important;
   font-weight: 600;
 
-  &:hover{
+  &:hover {
     color: #fff !important;
     text-shadow: #14b067 0px 0px 2px;
     transition: 0.2s linear;
   }
+}
+
+// footer
+.footer__wrapper {
+  width: 100%;
+  background-color: #212529;
+}
+.footer__inner{
+  width: 1240px;
+  display: flex;
 }
