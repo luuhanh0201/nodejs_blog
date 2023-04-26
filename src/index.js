@@ -4,8 +4,8 @@ const express = require('express');
 const morgan = require('morgan');
 const handlebars = require('express-handlebars').engine;
 const app = express();
-const port = 3000;
-
+const port = 3333;
+const route = require('./routes')
 app.use(express.static(path.join(__dirname, 'public')))
 
 // HTTP Logger
@@ -18,37 +18,9 @@ app.set("views", path.join(__dirname, "resources/views"))
 
 
 // router
+route(app);
 
-//  req = request 
-// res = response
 
-const search = function(request){
-  return request.query
-}
-app.get('/', (req, res) => {
-  console.log(search(req).search)
-  res.render('home');
-})
-app.get('/technology', (req, res) => {
-  console.log(req.query)
-  res.render('technology');
-})
-app.get('/company', (req, res) => {
-  res.render('company')
-})
-app.get('/learn', (req, res) => {
-  res.render('learn')
-})
-
-app.post('/',(req,res)=>{
-  res.send('')
-})
-// app.post('/learn', (req, res) => {
-//   res.render('learn')
-// })
-app.get('/about-me', (req, res) => {
-  res.render('about-me')
-})
 
 
 
