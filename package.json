@@ -7,15 +7,23 @@
     "prettier": "lint-staged",
     "start": "nodemon -w src/index.js localhost:3000",
     "test": "echo \"Error: no test specified\" && exit 1",
+
     "watch": "node-sass -w src/resources/scss/app.scss src/public/css/app.css"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/luuhanh0201/nodejs_blog.git"
+    "url":
+     "git+ssh://git@github.com/luuhanh0201/nodejs_blog.git"
   },
+
   "lint-staged": {
     "src/**/*.{js,json,scss,hbs}": "prettier -single-quote --trailing-comma all --tab-width 4 --write"
   },
+  "husky":{
+    "hooks:":{
+      "pre-commit":"lint-staged"
+    }
+  }
   "keywords": [
     "blog",
     "learn",
