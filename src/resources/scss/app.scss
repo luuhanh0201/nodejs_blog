@@ -1,26 +1,26 @@
 @import 'variables';
 
 .d-flex {
-  margin-bottom: 8px;
-  margin-top: 8px;
+    margin-bottom: 8px;
+    margin-top: 8px;
 }
 .about-me {
-  color: #14b067 !important;
-  font-weight: 600;
+    color: #14b067 !important;
+    font-weight: 600;
 
-  &:hover {
-    color: #fff !important;
-    text-shadow: #14b067 0px 0px 2px;
-    transition: 0.2s linear;
-  }
+    &:hover {
+        color: #fff !important;
+        text-shadow: #14b067 0px 0px 2px;
+        transition: 0.2s linear;
+    }
 }
 
 // footer
 .footer__wrapper {
-  width: 100%;
-  background-color: #212529;
+    width: 100%;
+    background-color: #212529;
 }
 .footer__inner {
-  width: 1240px;
-  display: flex;
+    width: 1240px;
+    display: flex;
 }
