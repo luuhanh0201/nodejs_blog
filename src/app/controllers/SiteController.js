@@ -1,13 +1,10 @@
 class SiteController {
-
-    index(req, res) {
-        res.render('home')
-    }
-    about(req,res){
-        res.render('about-me')
-    }
-    
-
+  index(req, res) {
+    res.render('home');
+  }
+  about(req, res) {
+    res.render('about-me');
+  }
 }
 
-module.exports = new SiteController;
+module.exports = new SiteController();

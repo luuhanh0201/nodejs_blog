@@ -3,7 +3,7 @@ const router = express.Router();
 
 const learnController = require('../app/controllers/LearnController');
 
-router.use('/:slug',learnController.detail)
-router.use('/',learnController.index)
+router.use('/:slug', learnController.detail);
+router.use('/', learnController.index);
 
-module.exports = router
+module.exports = router;

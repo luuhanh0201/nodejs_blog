@@ -3,9 +3,8 @@ const router = express.Router();
 
 const siteController = require('../app/controllers/SiteController');
 
-router.use('/about-me',siteController.about)
+router.use('/about-me', siteController.about);
 
+router.use('/', siteController.index);
 
-router.use('/',siteController.index)
-
-module.exports = router
+module.exports = router;
