@@ -23,7 +23,7 @@
     "hooks:":{
       "pre-commit":"lint-staged"
     }
-  }
+  },
   "keywords": [
     "blog",
     "learn",
