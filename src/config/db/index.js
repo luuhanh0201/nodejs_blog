@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const userName = "luuhanh0201"
 const password = "Hanh04042001"
 // const dbName = "nodejs-blog"
-const connectString = `mongodb+srv://${userName}:${password}@cluster0.gfw8qvn.mongodb.net/test`;
+const connectString = `mongodb+srv://${userName}:${password}@cluster0.gfw8qvn.mongodb.net/nodejs-blog`;
 // mongodb+srv://luuhanh0201:<password>@cluster0.gfw8qvn.mongodb.net/test
 async function connect() {
   try {
@@ -11,12 +11,11 @@ async function connect() {
       useNewUrlParser: true,
       useUnifiedTopology: true
     })
-    console.log("CONNECT OK")
+    console.log("CONNECT SUCCESSFULLY")
   } catch (error) {
     console.log("ERROR CONNECT: ")
     
   }
 
 }
-
 module.exports = {connect}
