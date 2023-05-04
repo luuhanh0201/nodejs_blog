@@ -1,12 +1,15 @@
 const Posts = require("../models/Posts")
-
+const {multipleMongooseToObject} = require('../../util/mongoose')
 class TechnologyController {
     //  /technology
     index(req, res, next) {
         Posts.find({})
             .then((posts) => {
+
+             
+
                 res.render('technology',{
-                    posts: posts
+                    posts: multipleMongooseToObject(posts)
                 })
             })
             .catch(err=>next(err));
