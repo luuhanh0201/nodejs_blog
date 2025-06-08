@@ -1,10 +1,11 @@
 {
   "name": "blog",
   "version": "1.0.0",
-  "main": "app.js",
+  "main": "src/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": " nodemon --inspect app.js"
+    "start": " nodemon --inspect --watch src/app.js ",
+    "watch": "sass --watch src/resources/scss/app.scss:src/public/css/app.css"
   },
   "repository": {
     "type": "git",
@@ -22,9 +23,12 @@
   "homepage": "https://github.com/luuhanh0201/nodejs_blog#readme",
   "description": "",
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "express-handlebars": "^5.0.3"
   },
   "devDependencies": {
-    "nodemon": "^3.1.10"
+    "morgan": "^1.10.0",
+    "nodemon": "^3.1.10",
+    "sass": "^1.89.1"
   }
 }
