@@ -1,0 +1,43 @@
+<div class="container mt-4">
+    <div class="row">
+        <!-- Cột bên trái: Thông tin khóa học -->
+        <div class="col-lg-3">
+            <div class="bg-light p-3 rounded shadow-sm text-center">
+                <p class="fw-bold">Bạn đã đăng ký khóa học này!</p>
+                <a href="#" class="btn btn-primary mb-3">HỌC NGAY</a>
+
+                <ul class="list-unstyled text-start">
+                    <li class="mb-2">
+                        <i class="bi bi-film"></i>
+                        Tổng số 25 videos
+                    </li>
+                    <li class="mb-2">
+                        <i class="bi bi-speedometer2"></i>
+                        Trình độ trung bình
+                    </li>
+                    <li class="mb-2">
+                        <i class="bi bi-clock"></i>
+                        Cần 6.05 giờ để học
+                    </li>
+                    <li class="mb-2">
+                        <i class="bi bi-laptop"></i>
+                        Truy cập mọi lúc, mọi nơi
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Cột bên phải: Video và mô tả -->
+        <div class="col-lg-9">
+            <h2 class="mb-3">{{courses.name}}</h2>
+            <div class="ratio ratio-16x9 mb-3">
+                <iframe
+                    src="https://www.youtube.com/embed/{{courses.videoId}}"
+                    title="YouTube video player"
+                    allowfullscreen
+                ></iframe>
+            </div>
+            <p>{{courses.description}}</p>
+        </div>
+    </div>
+</div>

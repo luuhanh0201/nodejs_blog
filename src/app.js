@@ -5,8 +5,12 @@ const handlebars = require("express-handlebars");
 const post = 3000;
 const app = express();
 const route = require("./routes/index.js");
-app.use(express.static(path.join(__dirname, "public")));
+const db = require("./config/db");
 
+// Connect to database
+db.connect();
+
+app.use(express.static(path.join(__dirname, "public")));
 
 // Morgan is a logging library for Node.js that provides HTTP request logging
 // app.use(morgan("combined"));
@@ -20,7 +24,7 @@ app.engine(
     }),
 );
 app.set("view engine", "hbs");
-app.set("views", path.join(__dirname, "resources/views"));
+app.set("views", path.join(__dirname, "resources", "views"));
 
 // rote
 route(app);
