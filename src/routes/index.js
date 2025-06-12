@@ -1,7 +1,9 @@
-const courseRouter = require("./course");
+const CourseRouter = require("./course");
 const SiteController = require("./site");
+const MeController = require("./me");
 function route(app) {
-    app.use("/courses", courseRouter);
+    app.use("/me",MeController)
+    app.use("/courses", CourseRouter);
     app.use("/", SiteController);
 
     // app.get("/", (req, res) => {

@@ -1,1 +1,22 @@
-<h1>create new courses</h1>
+<div>
+    <form method="post" action="/courses/store">
+        <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input type="text" class="form-control" name="name" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Video Id</label>
+            <input type="text" class="form-control" name="videoId" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Level</label>
+            <input type="text" class="form-control" name="level" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Description</label>
+            <textarea class="form-control" name="description"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>

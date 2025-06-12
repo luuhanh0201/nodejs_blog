@@ -1,23 +1,54 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/">F8 blog</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/courses">Courses</a>
-        </li>
-    
-      </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+    <div class="container">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">F8 blog</a>
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    {{! <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li> }}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/courses">Courses</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            role="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                        >
+                            <img
+                                class="user-avatar"
+                                src="https://scontent.fhan2-5.fna.fbcdn.net/v/t39.30808-6/472111998_3829560317292102_3046265317876554402_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=6BDOLdrS-4gQ7kNvwGhrzKi&_nc_oc=AdlwT-EJKkImKYYvWCio0KgdKnlxczwQKPyzq4pe1tw7CBhVe-aBqi-t49JAltgLnD0uaxS6hvvZVH4Z9jSqT1Z6&_nc_zt=23&_nc_ht=scontent.fhan2-5.fna&_nc_gid=LnLwusQLIxeNO_dVJ9unMw&oh=00_AfMiIzWhn_gtCzudXFUJB-y4YRciNGMR0qyX48TFUy8nYw&oe=684EF632"
+                                alt=""
+                            />
+                            Lưu Hạnh
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/courses/create">Đăng khoá học</a></li>
+                            <li><a class="dropdown-item" href="/me/stored/courses">Khoá học của tôi</a></li>
+                            <li><a class="dropdown-item" href="/me/stored/courses">Đăng xuất</a></li>
+
+                        </ul>
+                    </li>
+                </ul>
+                {{! <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form> }}
+            </div>
+        </div>
     </div>
-  </div>
 </nav>

@@ -1,0 +1,70 @@
+<div class="mt4">
+    <h3>Khoá học của tôi</h3>
+
+    <table class="table mt-4">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Tên khoá hoc</th>
+                <th scope="col">Trình độ</th>
+                <th scope="col">Thời gian tạo</th>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each courses}}
+                <tr>
+                    <th scope="row">{{sum @index 1}}</th>
+                    <td>{{this.name}}</td>
+                    <td>{{this.level}}</td>
+                    <td>{{this.createdAt}}</td>
+                    <td><a href="/courses/{{this._id}}/edit" class="btn btn-link">Sửa</a></td>
+                    <td><a
+                            href="#"
+                            class="btn btn-link"
+                            data-bs-toggle="modal"
+                            data-bs-target="#delete-courses-modal"
+                            data-id="{{this._id}}"
+                        >Xoá</a></td>
+                </tr>
+
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+{{!  }}
+<div class="modal" tabindex="-1" id="delete-courses-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>Bạn có muốn xoá khoá học này?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="submitBtnDelete">Xoá</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{!-- Hidden form --}}
+<form  name="deleteForm" method="POST"></form>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const exampleModal = document.getElementById('delete-courses-modal');
+    var conrseId;
+    var deleteForm = document.forms['deleteForm']
+    if (exampleModal) {
+        exampleModal.addEventListener('show.bs.modal', event => {
+            const button = event.relatedTarget;
+            conrseId = button.getAttribute('data-id'); // hoặc 'id' nếu bạn dùng id trực tiếp
+            
+            // Nếu bạn cần truyền id vào 1 nút trong modal (ví dụ nút xác nhận xoá)
+          const submitBtnDelete = document.querySelector("#submitBtnDelete")
+          submitBtnDelete.onclick=()=>{
+           deleteForm.action="/courses/"+conrseId+"?_method=DELETE";
+           deleteForm.submit()
+          }
+        });
+    }
+});
+</script>
