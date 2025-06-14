@@ -8,7 +8,9 @@ router.post("/store", courseController.store);
 
 router.get("/:id/edit", courseController.edit);        // Route có cấu trúc cụ thể hơn
 router.put("/:id", courseController.update);
+router.patch("/:id/restore", courseController.restore);
 router.delete("/:id", courseController.delete);
+router.delete("/:id/force", courseController.forceDestroy);
 
 router.get("/", courseController.index);               // Route gốc
 router.get("/:slug", courseController.show);           // Cuối cùng: dynamic slug

@@ -1,5 +1,8 @@
 <div class="mt4">
-    <h3>Khoá học của tôi</h3>
+    <div>
+        <h3>Khoá học của tôi</h3>
+        <a href="/me/trash/courses">Thùng rác</a>
+    </div>
 
     <table class="table mt-4">
         <thead>
@@ -18,7 +21,7 @@
                     <td>{{this.name}}</td>
                     <td>{{this.level}}</td>
                     <td>{{this.createdAt}}</td>
-                    <td><a href="/courses/{{this._id}}/edit" class="btn btn-link">Sửa</a></td>
+                    <td><a href="/courses/{{this._id}}/edit" class="btn btn-link btn-restore">Sửa</a></td>
                     <td><a
                             href="#"
                             class="btn btn-link"
@@ -26,6 +29,12 @@
                             data-bs-target="#delete-courses-modal"
                             data-id="{{this._id}}"
                         >Xoá</a></td>
+                </tr>
+            {{else}}
+                <tr>
+                    <td colspan="5" class="text-center">Bạn chưa đăng khoá học nào,
+                        <a href="/courses/create"> Ấn vào đây</a>
+                        để thêm khoá học của bạn!</td>
                 </tr>
 
             {{/each}}
@@ -41,29 +50,36 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" id="submitBtnDelete">Xoá</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Đóng</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
             </div>
         </div>
     </div>
 </div>
-{{!-- Hidden form --}}
-<form  name="deleteForm" method="POST"></form>
+{{! Hidden form }}
+<form name="deleteForm" method="POST"></form>
 <script>
-document.addEventListener("DOMContentLoaded", () => {
+   document.addEventListener("DOMContentLoaded", () => {
     const exampleModal = document.getElementById('delete-courses-modal');
-    var conrseId;
-    var deleteForm = document.forms['deleteForm']
+    const deleteForm = document.forms['deleteForm'];
+    let courseId;
+
     if (exampleModal) {
-        exampleModal.addEventListener('show.bs.modal', event => {
+        exampleModal.addEventListener('show.bs.modal', (event) => {
             const button = event.relatedTarget;
-            conrseId = button.getAttribute('data-id'); // hoặc 'id' nếu bạn dùng id trực tiếp
+
+            // Lấy courseId từ thuộc tính data-id của nút được click
+            courseId = button.getAttribute('data-id');
+
+            // Tìm nút xác nhận xoá trong modal
+            const submitBtnDelete = document.querySelector("#submitBtnDelete");
+
+            // Gán action cho form và submit khi click vào nút xoá
+            submitBtnDelete.onclick = () => {
+                deleteForm.action = "/courses/" + courseId + "?_method=DELETE";
+                deleteForm.submit();
+            };
+
             
-            // Nếu bạn cần truyền id vào 1 nút trong modal (ví dụ nút xác nhận xoá)
-          const submitBtnDelete = document.querySelector("#submitBtnDelete")
-          submitBtnDelete.onclick=()=>{
-           deleteForm.action="/courses/"+conrseId+"?_method=DELETE";
-           deleteForm.submit()
-          }
         });
     }
 });
