@@ -62,12 +62,32 @@ class CourseController {
             .catch(next);
     }
     // [DELETE] /:id/force
-
     forceDestroy(req, res, next) {
         Course.deleteOne({ _id: req.params.id })
             .then(() => res.redirect("/me/trash/courses"))
             .catch(next);
     }
-}
 
+    hanldeFormAction(req, res, next) {
+        switch (req.body.action) {
+            case "delete":
+                Course.delete({ _id: { $in: req.body.courses_Id } })
+                    .then(() => res.redirect("/me/stored/courses"))
+                    .catch(next);
+                break;
+            case "destroy":
+                Course.deleteOne({ _id: { $in: req.body.courses_Id } })
+                    .then(() => res.redirect("/me/trash/courses"))
+                    .catch(next);
+                break;
+            case "restore":
+                Course.restore({ _id: { $in: req.body.courses_Id } })
+                    .then(() => res.redirect("/me/stored/courses"))
+                    .catch(next);
+                break;
+            default:
+                res.json({ message: "action no invalid" });
+        }
+    }
+}
 module.exports = new CourseController();

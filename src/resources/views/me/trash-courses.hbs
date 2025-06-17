@@ -1,7 +1,21 @@
-<div class="mt4">
+<form name="container-form" class="mt-4" method="POST" action="/courses/handle-form-action">
     <div>
-        <h3>Khoá học đã xoá</h3>
+        <h3>Khoá học đã xoá </h3>
         <a href="/me/stored/courses">Danh sách khoá học</a>
+        <div class="mt-4 d-flex align-items-center">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="checkbox-all" />
+                <label class="form-check-label" for="checkbox-all">
+                    Chọn tất cả
+                </label>
+            </div>
+            <select class="form-control-sm checkbox-select-all-option" name="action" id="option-action-form">
+                <option value="default" selected>Chọn hành động</option>
+                <option  value="destroy">Xoá tất cả</option>
+                <option value="restore">Khôi phục tất cả</option>
+            </select>
+            <button class="btn btn-primary btn-small disabled btn-submit-button">Áp dụng</button>
+        </div>
     </div>
 
     <table class="table mt-4">
@@ -10,17 +24,21 @@
                 <th scope="col">#</th>
                 <th scope="col">Tên khoá học</th>
                 <th scope="col">Trình độ</th>
-                <th scope="col">Thời gian tạo</th>
+                <th scope="col">Thời gian xoá</th>
                 <td></td>
             </tr>
         </thead>
         <tbody>
             {{#each courses}}
                 <tr>
+                    <td><div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="{{this._id}}" name="courses_Id[]" />
+                        </div>
+                    </td>
                     <th scope="row">{{sum @index 1}}</th>
                     <td>{{this.name}}</td>
                     <td>{{this.level}}</td>
-                    <td>{{this.createdAt}}</td>
+                    <td>{{this.deletedAt}}</td>
 
                     <!-- Nút khôi phục -->
                     <td>
@@ -49,7 +67,7 @@
             {{/each}}
         </tbody>
     </table>
-</div>
+</form>
 
 <!-- Modal Xoá vĩnh viễn -->
 <div class="modal" tabindex="-1" id="delete-courses-modal">
@@ -73,6 +91,12 @@
 <script>
 document.addEventListener("DOMContentLoaded", () => {
     const deleteForm = document.forms['deleteForm'];
+    const checkboxAll = document.getElementById("checkbox-all")
+    const courseItemCheckbox = document.getElementsByName("courses_Id[]")
+    const btnSubmitButton = document.getElementsByClassName("btn-submit-button")
+    const containerForm = document.getElementsByName("container-form")
+    const optionActionForm = document.getElementById("option-action-form")
+     const deleteCoursesModal = document.getElementById("delete-courses-modal");
     let courseId;
 
     // Gán sự kiện click cho các nút Khôi phục
@@ -104,5 +128,51 @@ document.addEventListener("DOMContentLoaded", () => {
             };
         });
     }
+    checkboxAll.addEventListener("change",(e)=>{
+            const isCheckedAll = e.target.checked
+            courseItemCheckbox.forEach(checkbox=>{
+                checkbox.checked = isCheckedAll
+
+            })
+                renderCheckAllSubmitBtn()
+            
+        });
+    courseItemCheckbox.forEach((checkbox) => {
+            checkbox.addEventListener("change", (e) => {
+            const isCheckedAll =  courseItemCheckbox.length === document.querySelectorAll('input[name="courses_Id[]"]:checked').length;
+            checkboxAll.checked=isCheckedAll
+            renderCheckAllSubmitBtn()
+            });
+        });
+
+    function renderCheckAllSubmitBtn(){
+    const checkedCount = document.querySelectorAll('input[name="courses_Id[]"]:checked').length;
+
+    if(checkedCount > 0 || checkboxAll.checked === true   ){
+        btnSubmitButton[0].classList.remove("disabled")
+    }else{
+        btnSubmitButton[0].classList.add("disabled")
+    }
+
+   }
+btnSubmitButton[0].addEventListener("click",(e)=>{
+    e.preventDefault();
+    const isSubmit = !btnSubmitButton[0].classList.contains("disabled")
+    if(isSubmit && optionActionForm.value === "default"){
+    return
+    }
+
+    if (optionActionForm.value === "destroy") {
+            // 👉 Hiện modal xác nhận xoá
+            const modal = new bootstrap.Modal(deleteCoursesModal);
+            modal.show();
+            const submitBtnDelete = document.getElementById("submitBtnDelete");
+            // 👉 Xử lý khi bấm "Xoá" trong modal
+            submitBtnDelete.onclick = () => {
+            containerForm[0].submit();
+        };
+        }
+   }) 
 });
 </script>
+
