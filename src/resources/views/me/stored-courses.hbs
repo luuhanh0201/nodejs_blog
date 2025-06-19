@@ -22,9 +22,15 @@
         <thead>
             <tr><th></th>
                 <th scope="col">#</th>
-                <th scope="col">Tên khoá hoc</th>
-                <th scope="col">Trình độ</th>
-                <th scope="col">Thời gian tạo</th>
+                <th scope="col">Tên khoá học
+                    {{{sortable "name" _sort}}}
+                </th>
+                <th class="text-nowrap" scope="col">Trình độ
+                    {{{sortable "level" _sort}}}
+                </th>
+                <th scope="col">Thời gian tạo
+                    {{{sortable "createdAt" _sort}}}
+                </th>
                 <td></td>
             </tr>
         </thead>
@@ -76,69 +82,33 @@
 {{! Hidden form }}
 <form name="deleteForm" method="POST"></form>
 <script>
-    document.addEventListener("DOMContentLoaded", () => {
-    const exampleModal = document.getElementById("delete-courses-modal");
-    const deleteForm = document.forms["deleteForm"];
-    const checkboxAll = document.getElementById("checkbox-all")
-    const courseItemCheckbox = document.getElementsByName("courses_Id[]")
-    const btnSubmitButton = document.getElementsByClassName("btn-submit-button")
-    const containerForm = document.getElementsByName("container-form")
-    const optionActionForm = document.getElementById("option-action-form")
-    let courseId;
-    if (exampleModal) {
-        exampleModal.addEventListener("show.bs.modal", (event) => {
-            const button = event.relatedTarget;
-            //Lấy courseId từ thuộc tính data-id của nút được click
-            courseId = button.getAttribute("data-id"); // Tìm nút xác nhận xoá trong modal
-            const submitBtnDelete = document.querySelector("#submitBtnDelete");
-            // // Gán action cho form và submit khi click vào nút xoá
-            submitBtnDelete.onclick = () => {
-                console.log(213);
-                deleteForm.action = "/courses/" + courseId + "?_method=DELETE";
-                deleteForm.submit();
-            };
-        });
-    }
-    {{!-- Check all --}}
-    checkboxAll.addEventListener("change",(e)=>{
-        const isCheckedAll = e.target.checked
-        courseItemCheckbox.forEach(checkbox=>{
-            checkbox.checked = isCheckedAll
+    document.addEventListener("DOMContentLoaded", () => { const exampleModal =
+    document.getElementById("delete-courses-modal"); const deleteForm = document.forms["deleteForm"]; const checkboxAll
+    = document.getElementById("checkbox-all") const courseItemCheckbox = document.getElementsByName("courses_Id[]")
+    const btnSubmitButton = document.getElementsByClassName("btn-submit-button") const containerForm =
+    document.getElementsByName("container-form") const optionActionForm = document.getElementById("option-action-form")
+    let courseId; if (exampleModal) { exampleModal.addEventListener("show.bs.modal", (event) => { const button =
+    event.relatedTarget; //Lấy courseId từ thuộc tính data-id của nút được click courseId =
+    button.getAttribute("data-id"); // Tìm nút xác nhận xoá trong modal const submitBtnDelete =
+    document.querySelector("#submitBtnDelete"); // // Gán action cho form và submit khi click vào nút xoá
+    submitBtnDelete.onclick = () => { console.log(213); deleteForm.action = "/courses/" + courseId + "?_method=DELETE";
+    deleteForm.submit(); }; }); }
+    {{! Check all }}
+    checkboxAll.addEventListener("change",(e)=>{ const isCheckedAll = e.target.checked
+    courseItemCheckbox.forEach(checkbox=>{ checkbox.checked = isCheckedAll }) renderCheckAllSubmitBtn() });
+    {{! course checkbox }}
+    courseItemCheckbox.forEach((checkbox) => { checkbox.addEventListener("change", (e) => { const isCheckedAll =
+    courseItemCheckbox.length === document.querySelectorAll('input[name="courses_Id[]"]:checked').length;
+    checkboxAll.checked=isCheckedAll renderCheckAllSubmitBtn() }); });
 
-        })
-            renderCheckAllSubmitBtn()
-        
-    });
-    {{!-- course checkbox --}}
-        courseItemCheckbox.forEach((checkbox) => {
-            checkbox.addEventListener("change", (e) => {
-            const isCheckedAll =  courseItemCheckbox.length === document.querySelectorAll('input[name="courses_Id[]"]:checked').length;
-            checkboxAll.checked=isCheckedAll
-            renderCheckAllSubmitBtn()
-            });
-        });
-   
-   {{!-- Re-render submit button --}}
-   function renderCheckAllSubmitBtn(){
-    const checkedCount = document.querySelectorAll('input[name="courses_Id[]"]:checked').length;
-
-    if(checkedCount > 0 || checkboxAll.checked === true   ){
-        btnSubmitButton[0].classList.remove("disabled")
-    }else{
-        btnSubmitButton[0].classList.add("disabled")
-    }
-
-   }
-
-   {{!-- check all submit button --}}
-  btnSubmitButton[0].addEventListener("click",(e)=>{
-    e.preventDefault();
-    const isSubmit = !btnSubmitButton[0].classList.contains("disabled")
-    if(isSubmit && optionActionForm.value !== "default"){
-    containerForm[0].submit()
-    }else{
-
-    }
-   }) 
-})
+    {{! Re-render submit button }}
+    function renderCheckAllSubmitBtn(){ const checkedCount =
+    document.querySelectorAll('input[name="courses_Id[]"]:checked').length; if((checkedCount > 0 || checkboxAll.checked
+    === true) && optionActionForm.value != "default" ){ btnSubmitButton[0].classList.remove("disabled") }else{
+    btnSubmitButton[0].classList.add("disabled") } } optionActionForm.addEventListener("change", () => {
+    renderCheckAllSubmitBtn(); });
+    {{! check all submit button }}
+    btnSubmitButton[0].addEventListener("click",(e)=>{ e.preventDefault(); const isSubmit =
+    !btnSubmitButton[0].classList.contains("disabled") if(isSubmit && optionActionForm.value !== "default"){
+    containerForm[0].submit() }else{ } }) })
 </script>
